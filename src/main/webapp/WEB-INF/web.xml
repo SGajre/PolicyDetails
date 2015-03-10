@@ -12,11 +12,11 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
 			<param-name>com.sun.jersey.config.property.packages</param-name>
 			<param-value>org.farmers.policy.srv</param-value>
 		</init-param>
-	<load-on-startup>1</load-on-startup>
+	<load-on-startup>2</load-on-startup>
   </servlet>
 	<servlet-mapping>
 		<servlet-name>Jersey REST Service</servlet-name>
-		<url-pattern>/*</url-pattern>
+		<url-pattern>/Rest/*</url-pattern>
 	</servlet-mapping>
 	
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
@@ -31,6 +31,28 @@ xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns
 			/WEB-INF/spring-persistence.xml
 		</param-value>		
 	</context-param>
+	
+	
+	<servlet>
+		<servlet-name>ODataServlet</servlet-name>
+		<servlet-class>org.apache.cxf.jaxrs.servlet.CXFNonSpringJaxrsServlet</servlet-class>
+		<init-param>
+			<param-name>javax.ws.rs.Application</param-name>
+			<param-value>org.apache.olingo.odata2.core.rest.app.ODataApplication</param-value>
+		</init-param>
+		<init-param>
+			<param-name>org.apache.olingo.odata2.service.factory</param-name>
+			<param-value>org.farmers.policy.odata.PolicyServiceFactory</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ODataServlet</servlet-name>
+		<url-pattern>/Policy.svc/*</url-pattern>
+	</servlet-mapping>
+	
+	
+	
 	
 	
 
